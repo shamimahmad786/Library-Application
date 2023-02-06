@@ -1,0 +1,46 @@
+package rules
+ 
+import com.example.demo.model.DomainScore
+rule "Grade 1"
+	when 
+		domainScore: DomainScore(totalScore >= 801 && totalScore <= 850);
+	then
+		domainScore.setGrade("1");
+	end;
+rule "Grade 2"
+	when 
+		domainScore: DomainScore(totalScore >= 751 && totalScore <= 800);
+	then
+		domainScore.setGrade("2");
+	end;
+rule "Grade 3"
+	when 
+		domainScore: DomainScore(totalScore >= 701 && totalScore <= 750);
+	then
+		domainScore.setGrade("3");
+	end;
+rule "Grade 4"
+	when 
+		domainScore: DomainScore(totalScore >= 651 && totalScore <= 700);
+	then
+		domainScore.setGrade("4");
+	end;
+rule "Grade 5"
+	when 
+		domainScore: DomainScore(totalScore >= 601 && totalScore <= 650);
+	then
+		domainScore.setGrade("5");
+	end;
+rule "Grade 6"
+	when 
+		domainScore: DomainScore(totalScore >= 551 && totalScore <= 600);
+	then
+		domainScore.setGrade("6");
+	end;
+rule "Grade 7"
+	when 
+		domainScore: DomainScore(totalScore >= 1 && totalScore <= 550);
+	then
+		domainScore.setGrade("7");
+	end;
+	
