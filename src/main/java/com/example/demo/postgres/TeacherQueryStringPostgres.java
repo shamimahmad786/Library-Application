@@ -946,7 +946,9 @@ public static String QRTeacherBySocialCategory_126(String strType, String StrCod
 			strQuery.append(" from reports.report_teacher_2008_126 tp  ");
 			strQuery.append(" where  ");
 			strQuery.append(" year_id= " + yearId);
-			strQuery.append("  group by sch_mgmt_id , sch_mgmt_name  "  );
+//			strQuery.append("  group by sch_mgmt_id , sch_mgmt_name  "  );
+			strQuery.append("  group by "  );
+			strQuery.append("  grouping sets ((sch_mgmt_id , sch_mgmt_name),())  "  );
 			strQuery.append("    "  );
 			strQuery.append(" order by sch_mgmt_id  ");
 			break;
@@ -971,7 +973,9 @@ public static String QRTeacherBySocialCategory_126(String strType, String StrCod
 			strQuery.append(" from reports.report_teacher_2008_126 tp  ");
 			strQuery.append(" where  ");
 			strQuery.append(" year_id= " + yearId);
-			strQuery.append("  group by state_name ,sch_mgmt_id , sch_mgmt_name  "  );
+//			strQuery.append("  group by state_name ,sch_mgmt_id , sch_mgmt_name  "  );
+			strQuery.append("  group by "  );
+			strQuery.append("  grouping sets ((state_name ,sch_mgmt_id , sch_mgmt_name),(state_name),())  "  );
 			strQuery.append("    "  );
 			strQuery.append(" order by state_name, sch_mgmt_id  ");	
 			break;
@@ -999,7 +1003,9 @@ public static String QRTeacherBySocialCategory_126(String strType, String StrCod
 			strQuery.append(" where  ");
 			strQuery.append(" year_id= " + yearId);
 			strQuery.append(" and  state_cd= '"+StrCode+"'" );
-			strQuery.append("  group by state_name ,sch_mgmt_id , sch_mgmt_name  "  );
+//			strQuery.append("  group by state_name ,sch_mgmt_id , sch_mgmt_name  "  );
+			strQuery.append("  group by "  );
+			strQuery.append("  grouping sets ((state_name ,sch_mgmt_id , sch_mgmt_name),(state_name),())  "  );
 			strQuery.append("    "  );
 			strQuery.append(" order by state_name, sch_mgmt_id  ");	
 			
@@ -1031,7 +1037,9 @@ public static String QRTeacherBySocialCategory_126(String strType, String StrCod
 			strQuery.append(" where  ");
 			strQuery.append(" year_id= " + yearId);
 			strQuery.append(" and  state_cd= '"+StrCode+"'" );
-			strQuery.append("  group by district_name ,sch_mgmt_id , sch_mgmt_name  "  );
+//			strQuery.append("  group by district_name ,sch_mgmt_id , sch_mgmt_name  "  );
+			strQuery.append("  group by "  );
+			strQuery.append("  grouping sets ((district_name ,sch_mgmt_id , sch_mgmt_name),(district_name),())  "  );
 			strQuery.append("    "  );
 			strQuery.append(" order by district_name, sch_mgmt_id  ");	
 			break;
@@ -1057,7 +1065,9 @@ public static String QRTeacherBySocialCategory_126(String strType, String StrCod
 			strQuery.append(" where  ");
 			strQuery.append(" year_id= " + yearId);
 			strQuery.append(" and  district_cd= '"+StrCode+"'" );
-			strQuery.append("  group by district_name ,sch_mgmt_id , sch_mgmt_name  "  );
+//			strQuery.append("  group by district_name ,sch_mgmt_id , sch_mgmt_name  "  );
+			strQuery.append("  group by "  );
+			strQuery.append("  grouping sets ((district_name ,sch_mgmt_id , sch_mgmt_name),(district_name),())  "  );
 			strQuery.append("    "  );
 			strQuery.append(" order by district_name, sch_mgmt_id  ");	
 			break;
@@ -1122,7 +1132,7 @@ public static String QRTeacherByDisabilityType_127(String strType, String StrCod
 			strQuery.append(" group by  ");
 			strQuery.append(" sch_category_name, ");
 			strQuery.append(" sch_mgmt_name ");
-			strQuery.append("  ");
+			strQuery.append(" order by sch_mgmt_name,sch_category_name ");
 			strQuery.append("  ");
 			strQuery.append("  ");
 			
@@ -1158,7 +1168,7 @@ public static String QRTeacherByDisabilityType_127(String strType, String StrCod
 			strQuery.append(" sch_category_name, ");
 			strQuery.append(" sch_mgmt_name , ");
 			strQuery.append(" state_name ");
-			strQuery.append("  ");
+			strQuery.append(" order by state_name,sch_mgmt_name,sch_category_name  ");
 			strQuery.append("  ");
 			break;
 		case "S1" :
@@ -1192,7 +1202,7 @@ public static String QRTeacherByDisabilityType_127(String strType, String StrCod
 			strQuery.append(" sch_category_name, ");
 			strQuery.append(" sch_mgmt_name , ");
 			strQuery.append(" state_name ");
-			strQuery.append("  ");
+			strQuery.append(" order by state_name,sch_mgmt_name,sch_category_name  ");
 			strQuery.append("  ");
 			
 			
@@ -1227,7 +1237,7 @@ public static String QRTeacherByDisabilityType_127(String strType, String StrCod
 			strQuery.append(" sch_category_name, ");
 			strQuery.append(" sch_mgmt_name , ");
 			strQuery.append(" district_name ");
-			strQuery.append("  ");
+			strQuery.append(" order by district_name,sch_mgmt_name,sch_category_name ");
 			strQuery.append("  ");
 			break;
 		case "D1" :
@@ -1260,7 +1270,7 @@ public static String QRTeacherByDisabilityType_127(String strType, String StrCod
 			strQuery.append(" sch_category_name, ");
 			strQuery.append(" sch_mgmt_name , ");
 			strQuery.append(" district_name ");
-			strQuery.append("  ");
+			strQuery.append(" order by district_name,sch_mgmt_name ,sch_category_name");
 			strQuery.append("  ");
 			break;
 		case "B" :
@@ -1572,52 +1582,69 @@ public static String NoofTeacher_83_2001(String strType, String StrCode, String 
 		StringBuilder strQuery=new StringBuilder();
 		switch(strType) {
 		case "N" :
-			strQuery.append(" select   sch_mgmt_name, sch_mgmt_id ,") ;
+			strQuery.append(" select   sch_mgmt_name, 'All India' as locn_name, sch_mgmt_id ,") ;
 			strQuery.append(" sum(total_teacher)  as total ,");
 			strQuery.append(commonMethodSumOfTeacher());
 			strQuery.append(" from reports.teacher_cat_mgmt_qual   ");
 			strQuery.append(" where year_id= " + year);
-			strQuery.append(" GROUP BY sch_mgmt_name, sch_mgmt_id ");
-			strQuery.append(" ORDER BY sch_mgmt_name, sch_mgmt_id ");
+//			strQuery.append(" GROUP BY sch_mgmt_name, sch_mgmt_id ");
+			strQuery.append("  group by ");
+			strQuery.append("  grouping sets ((sch_mgmt_name,sch_mgmt_id),()) ");
+			strQuery.append("  order by sch_mgmt_id ");
+//			strQuery.append(" ORDER BY sch_mgmt_name, sch_mgmt_id ");
 			break;
 		case "S1" :
-			strQuery.append(" select  sch_mgmt_name, sch_mgmt_id ,") ;
+			strQuery.append(" select  sch_mgmt_name, sch_mgmt_id ,state_name as locn_name,") ;
 			strQuery.append(" sum(total_teacher)  as total ,");
 			strQuery.append(commonMethodSumOfTeacher());
 			strQuery.append(" from reports.teacher_cat_mgmt_qual   ");
 			strQuery.append(" where state_cd='"+ StrCode + "' ");
 			strQuery.append(" and year_id= " + year);
-			strQuery.append(" GROUP BY sch_mgmt_name,sch_mgmt_id ");
-			strQuery.append(" ORDER BY sch_mgmt_id ");
+			
+			strQuery.append("  group by");
+			strQuery.append("  grouping sets ((sch_mgmt_name,sch_mgmt_id,state_name),()) ");
+			strQuery.append("  order by state_name,sch_mgmt_id  ");
+//			strQuery.append(" GROUP BY sch_mgmt_name,sch_mgmt_id ");
+//			strQuery.append(" ORDER BY sch_mgmt_id ");
 			break;
 		case "S" :
-			strQuery.append(" select state_cd as code, state_name as locn_name  ,") ;
+			strQuery.append(" select state_cd as code,sch_mgmt_id,sch_mgmt_name, state_name as locn_name  ,") ;
 			strQuery.append(" sum(total_teacher)  as total ,");
 			strQuery.append(commonMethodSumOfTeacher());
 			strQuery.append(" from reports.teacher_cat_mgmt_qual   ");
 			strQuery.append(" where year_id= " + year);
-			strQuery.append(" GROUP BY state_cd , state_name  ");
-			strQuery.append(" ORDER BY state_name  ");
+			
+//			strQuery.append(" GROUP BY state_cd , state_name  ");
+//			strQuery.append(" ORDER BY state_name  ");
+			strQuery.append("  group by ");
+			strQuery.append("  grouping sets ((state_cd , state_name  ,sch_mgmt_name,sch_mgmt_id),(state_name),()) ");
+			strQuery.append("  order by state_name,sch_mgmt_id  ");
+			
 			break;
 		case "D" :
-			strQuery.append(" select district_cd as code, district_name as locn_name ,") ;
+			strQuery.append(" select district_cd as code,sch_mgmt_name, district_name as locn_name ,") ;
 			strQuery.append(" sum(total_teacher)  as total ,");
 			strQuery.append(commonMethodSumOfTeacher());
 			strQuery.append(" from reports.teacher_cat_mgmt_qual   ");
 			strQuery.append(" where state_cd='"+ StrCode + "' ");
 			strQuery.append(" and year_id= " + year);
-			strQuery.append(" GROUP BY district_cd , district_name ");
-			strQuery.append(" ORDER BY district_name ");
+			strQuery.append("  group by  ");
+			strQuery.append("  grouping sets ((district_cd,district_name,sch_mgmt_name,sch_mgmt_id),(district_name),()) ");
+			strQuery.append("  order by district_name,sch_mgmt_id  ");
 			break;
 		case "D1" :
-			strQuery.append(" select  sch_mgmt_name, sch_mgmt_id ,") ;
+			strQuery.append(" select  sch_mgmt_name, sch_mgmt_id , district_name as locn_name,") ;
 			strQuery.append(" sum(total_teacher)  as total ,");
 			strQuery.append(commonMethodSumOfTeacher());
 			strQuery.append(" from reports.teacher_cat_mgmt_qual   ");
 			strQuery.append(" where district_cd='"+ StrCode + "' ");
 			strQuery.append(" and year_id= " + year);
-			strQuery.append(" GROUP BY sch_mgmt_name,  sch_mgmt_id ");
-			strQuery.append(" ORDER BY sch_mgmt_id ");
+			strQuery.append("  group by ");
+			strQuery.append("  grouping sets ((district_code,district_name,sch_mgmt_name,sch_mgmt_id),(district_name),()) ");
+			strQuery.append("  order by district_name,sch_mgmt_id  ");
+                
+//			strQuery.append(" GROUP BY sch_mgmt_name,  sch_mgmt_id ");
+//			strQuery.append(" ORDER BY sch_mgmt_id ");
 			break;
 		case "B" :
 			strQuery.append(" select block_cd as code, block_name as locn_name ,") ;

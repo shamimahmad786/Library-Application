@@ -88,7 +88,7 @@ public static String fetchSchoo_86To90(String strType, String StrCode ,String fl
 			
 			switch(strType) {
 			case "N" :
-				strQuery.append(" select  sch_mgmt_name, sch_mgmt_id ,") ;
+				strQuery.append(" select  sch_mgmt_name, sch_mgmt_id ,'All India' as locn_name , ") ;
 				strQuery.append(" coalesce( sum(" +flashName+ " ) ,0) as total ,");
 				strQuery.append(" coalesce ( sum(" +flashName+ " ) filter ( where (sch_category_id= 1)),0) as   cat1,  ") ; 
 				strQuery.append(" coalesce ( sum(" +flashName+ " ) filter ( where (sch_category_id= 2)),0) as   cat2,");
@@ -103,10 +103,12 @@ public static String fetchSchoo_86To90(String strType, String StrCode ,String fl
 				strQuery.append(" coalesce ( sum(" +flashName+ ") filter ( where (sch_category_id= 11)),0) as   cat11 ");
 				strQuery.append(" from reports.school_part_one ");
 				strQuery.append("  where year_id ="+ yearId);
-				strQuery.append("  group by sch_mgmt_name,sch_mgmt_id ");
+				strQuery.append("  group by ");
+				strQuery.append("  grouping sets ((sch_mgmt_name,sch_mgmt_id),()) ");
+				strQuery.append("  order by sch_mgmt_id ");
 				break;
 			case "S" :
-				strQuery.append(" select state_code as code, state_name as locn_name ,") ;
+				strQuery.append(" select state_code as code,sch_mgmt_name, state_name as locn_name ,") ;
 				strQuery.append(" coalesce( sum(" +flashName+ " ) ,0) as total ,");
 				strQuery.append(" coalesce ( sum(" +flashName+ " ) filter ( where (sch_category_id= 1)),0) as   cat1,  ") ; 
 				strQuery.append(" coalesce ( sum(" +flashName+ " ) filter ( where (sch_category_id= 2)),0) as   cat2,");
@@ -121,11 +123,12 @@ public static String fetchSchoo_86To90(String strType, String StrCode ,String fl
 				strQuery.append(" coalesce ( sum(" +flashName+ ") filter ( where (sch_category_id= 11)),0) as   cat11 ");			
 				strQuery.append(" from reports.school_part_one ");
 				strQuery.append("  where year_id ="+ yearId);
-				strQuery.append("  group by state_code , state_name  ");
-				strQuery.append("  order by state_name  ");
+				strQuery.append("  group by ");
+				strQuery.append("  grouping sets ((state_code , state_name  ,sch_mgmt_name,sch_mgmt_id),(state_name),()) ");
+				strQuery.append("  order by state_name,sch_mgmt_id  ");
 				break;
 			case "S1" :
-				strQuery.append(" select  sch_mgmt_name, sch_mgmt_id ,") ;
+				strQuery.append(" select  sch_mgmt_name,state_name as locn_name, sch_mgmt_id ,") ;
 				strQuery.append(" coalesce( sum(" +flashName+ " ) ,0) as total ,");
 				strQuery.append(" coalesce ( sum(" +flashName+ " ) filter ( where (sch_category_id= 1)),0) as   cat1,  ") ; 
 				strQuery.append(" coalesce ( sum(" +flashName+ " ) filter ( where (sch_category_id= 2)),0) as   cat2,");
@@ -141,11 +144,13 @@ public static String fetchSchoo_86To90(String strType, String StrCode ,String fl
 				strQuery.append(" from reports.school_part_one ");
 				strQuery.append("  where state_code ='"+StrCode.toString()+"' ");
 				strQuery.append("  and year_id ="+ yearId);
-				strQuery.append("  group by sch_mgmt_name,sch_mgmt_id ");
+				strQuery.append("  group by");
+				strQuery.append("  grouping sets ((sch_mgmt_name,sch_mgmt_id,state_name),()) ");
+				strQuery.append("  order by state_name,sch_mgmt_id  ");
 				
 				break;
 			case "D" :
-				strQuery.append(" select district_code as code, district_name as locn_name ,") ;
+				strQuery.append(" select district_code as code,sch_mgmt_name, district_name as locn_name ,") ;
 				strQuery.append(" coalesce( sum(" +flashName+ " ) ,0) as total ,");
 				strQuery.append(" coalesce ( sum(" +flashName+ " ) filter ( where (sch_category_id= 1)),0) as   cat1,  ") ; 
 				strQuery.append(" coalesce ( sum(" +flashName+ " ) filter ( where (sch_category_id= 2)),0) as   cat2,");
@@ -161,8 +166,10 @@ public static String fetchSchoo_86To90(String strType, String StrCode ,String fl
 				strQuery.append(" from reports.school_part_one ");
 				strQuery.append("  where state_code ='"+StrCode.toString()+"' ");
 				strQuery.append("  and year_id ="+ yearId);
-				strQuery.append("  group by district_code , district_name ");
-				strQuery.append("  order by district_name ");
+				strQuery.append("  group by  ");
+				strQuery.append("  grouping sets ((district_code,district_name,sch_mgmt_name,sch_mgmt_id),(district_name),()) ");
+				strQuery.append("  order by district_name,sch_mgmt_id  ");
+//				strQuery.append("  order by district_name ");
 				break;
 			case "D1" :
 				strQuery.append(" select  sch_mgmt_name, sch_mgmt_id ,") ;
@@ -181,7 +188,9 @@ public static String fetchSchoo_86To90(String strType, String StrCode ,String fl
 				strQuery.append(" from reports.school_part_one ");
 				strQuery.append("  where district_code ='"+StrCode.toString()+"' ");
 				strQuery.append("  and year_id ="+ yearId);
-				strQuery.append("  group by sch_mgmt_name,sch_mgmt_id ");
+				strQuery.append("  group by ");
+				strQuery.append("  grouping sets ((district_code,district_name,sch_mgmt_name,sch_mgmt_id),(district_name),()) ");
+				strQuery.append("  order by district_name,sch_mgmt_id  ");
 				break;
 			case "B" :
 				strQuery.append(" select block_cd as code, block_name as locn_name ,") ;
@@ -338,11 +347,12 @@ public static String fetchSchoo_86To90(String strType, String StrCode ,String fl
 				strQuery.append("  coalesce(sum(no_of_school) filter ( where (sch_category_id= 11)),0) as   cat11 ");
 				strQuery.append("  from reports.school_part_one fpo  ");
 				strQuery.append(" where  year_id ="+ yearId);
-				strQuery.append("  group by sch_mgmt_id , sch_mgmt_name ");
+				strQuery.append("  group by ");
+				strQuery.append("  grouping sets ((sch_mgmt_id , sch_mgmt_name),()) ");
 				strQuery.append("  order by sch_mgmt_id ");
 				break;
 			case "S" :
-				strQuery.append(" select state_code as code, state_name as locn_name, sum(no_of_school) as total , ");
+				strQuery.append(" select state_code as code,sch_mgmt_name,sch_mgmt_id, state_name as locn_name, sum(no_of_school) as total , ");
 				strQuery.append("  coalesce(sum(no_of_school) filter ( where (sch_category_id= 1)),0) as   cat1,  ") ; 
 				strQuery.append("  coalesce(sum(no_of_school) filter ( where (sch_category_id= 2)),0) as   cat2,");
 				strQuery.append("  coalesce(sum(no_of_school) filter ( where (sch_category_id= 3)),0) as   cat3,  ") ; 
@@ -356,8 +366,9 @@ public static String fetchSchoo_86To90(String strType, String StrCode ,String fl
 				strQuery.append("  coalesce(sum(no_of_school) filter ( where (sch_category_id= 11)),0) as   cat11 ");
 				strQuery.append("  from reports.school_part_one fpo  ");
 				strQuery.append(" where  year_id ="+ yearId);
-				strQuery.append("   group by state_code , state_name ");
-				strQuery.append(" order by state_name" );
+				strQuery.append("   group by ");
+				strQuery.append("   grouping sets ((state_code , state_name,sch_mgmt_id,sch_mgmt_name),(state_name),()) ");
+				strQuery.append(" order by state_name, sch_mgmt_id" );
 				break;
 			case "S1" :
 				strQuery.append(" select sum(no_of_school) as total ,   ");
@@ -376,11 +387,12 @@ public static String fetchSchoo_86To90(String strType, String StrCode ,String fl
 				strQuery.append("  from reports.school_part_one fpo  ");
 				strQuery.append(" where state_code ='"+StrCode.toString()+"'");
 				strQuery.append(" and  year_id ="+ yearId);
-				strQuery.append("  group by sch_mgmt_id , sch_mgmt_name ");
-				strQuery.append("  order by sch_mgmt_id ");
+				strQuery.append("  group by ");
+				strQuery.append("   grouping sets ((state_code , state_name,sch_mgmt_id,sch_mgmt_name),()) ");
+				strQuery.append("  order by state_name, sch_mgmt_id ");
 				break;
 			case "D" :
-				strQuery.append(" select   ");
+				strQuery.append(" select  sch_mgmt_name,sch_mgmt_id, ");
 				strQuery.append(" district_code as code, district_name as locn_name , sum(no_of_school) as total,  ");
 				strQuery.append("  coalesce(sum(no_of_school) filter ( where (sch_category_id= 1)),0) as   cat1,  ") ; 
 				strQuery.append("  coalesce(sum(no_of_school) filter ( where (sch_category_id= 2)),0) as   cat2,");
@@ -396,7 +408,9 @@ public static String fetchSchoo_86To90(String strType, String StrCode ,String fl
 				strQuery.append("  from reports.school_part_one fpo  ");
 				strQuery.append("  where state_code ='"+StrCode.toString()+"' ");
 				strQuery.append(" and  year_id ="+ yearId);
-				strQuery.append("  group by district_code , district_name order by district_name ");
+				strQuery.append("  group by  ");
+				strQuery.append("   grouping sets ((district_code , district_name,sch_mgmt_name,sch_mgmt_id),(district_name),()) ");
+				strQuery.append("  order by district_name, sch_mgmt_id ");
 				break;
 			case "D1" :
 				strQuery.append(" select sum(no_of_school) as total ,   ");
@@ -1931,7 +1945,9 @@ public static String QRBoardWiseSchool_94(String strType, String StrCode) {
 					strQuery.append(" from reports.enrollment_fresh_caste_wise   ");
 					strQuery.append(" where  ");
 					strQuery.append(" year_id = "+ yearId);
-					strQuery.append(" GROUP BY item_name  ");
+					//strQuery.append(" GROUP BY item_name  ");
+					strQuery.append(" GROUP BY ");
+					strQuery.append(" grouping sets( (item_name), () )  ");
 					strQuery.append(" order by item_name  "); 
 				  break;
 			  case "S" :
@@ -1943,7 +1959,9 @@ public static String QRBoardWiseSchool_94(String strType, String StrCode) {
 					strQuery.append(" from reports.enrollment_fresh_caste_wise   ");
 					strQuery.append(" where   ");
 					strQuery.append(" year_id = "+ yearId);
-					strQuery.append(" GROUP BY item_name, state_name  ");
+					//strQuery.append(" GROUP BY item_name, state_name  ");
+					strQuery.append(" GROUP BY ");
+					strQuery.append(" grouping sets( (item_name, state_name), (state_name),() )  ");
 					strQuery.append(" order by state_name, item_name  ");
 				  break;
 			  case "S1" :
@@ -1956,7 +1974,9 @@ public static String QRBoardWiseSchool_94(String strType, String StrCode) {
 					strQuery.append(" where  ");
 					strQuery.append("   st_code= '"+StrCode+"'" );
 					strQuery.append(" and  year_id = "+ yearId);
-					strQuery.append(" GROUP BY item_name, state_name  ");
+					//strQuery.append(" GROUP BY item_name, state_name  ");
+					strQuery.append(" GROUP BY ");
+					strQuery.append(" grouping sets( (item_name, state_name),() )  ");
 					strQuery.append(" order by state_name, item_name  ");
 				  break;
 			  case "D" :
@@ -1969,7 +1989,9 @@ public static String QRBoardWiseSchool_94(String strType, String StrCode) {
 					strQuery.append(" where   ");
 					strQuery.append("   st_code= '"+StrCode+"'" );
 					strQuery.append(" and  year_id = "+ yearId);
-					strQuery.append(" GROUP BY item_name, district_name  ");
+					strQuery.append(" GROUP BY ");
+					strQuery.append(" grouping sets( (item_name, district_name), (district_name),() )  ");
+				//	strQuery.append(" GROUP BY item_name, district_name  ");
 					strQuery.append(" order by district_name, item_name  ");
 				  break;
 			  case "D1" :
@@ -2108,7 +2130,7 @@ public static String QRBoardWiseSchool_94(String strType, String StrCode) {
 				
 				break;
             case "S":
-            	strQueryTeacherCount.append(" select ");
+            	strQueryTeacherCount.append(" select sch_mgmt_name,");
 				strQueryTeacherCount.append("	sum(primaryonlym)  as primaryonlym,	") 	;
 				strQueryTeacherCount.append("	sum(primaryonlyf)  as primaryonlyf,	") 	;
 				strQueryTeacherCount.append("	sum(upperprimaryonlym)  as upperprimaryonlym,	") 	;
@@ -2172,12 +2194,15 @@ public static String QRBoardWiseSchool_94(String strType, String StrCode) {
 				strQueryTeacherCount.append( "  ");
 				strQueryTeacherCount.append( "  from reports.teacher_cat_mgmt_qual  ");
 				strQueryTeacherCount.append("   where  year_id = "+ yearId);
-				strQueryTeacherCount.append( "  group by  ");
-				strQueryTeacherCount.append( "  state_name ");
-				strQueryTeacherCount.append( "  order by state_name   ");
+				strQueryTeacherCount.append("  group by ");
+				strQueryTeacherCount.append("  grouping sets ((state_cd , state_name  ,sch_mgmt_name,sch_mgmt_id),(state_name),()) ");
+				strQueryTeacherCount.append("  order by state_name,sch_mgmt_id  ");
+//				strQueryTeacherCount.append( "  group by  ");
+//				strQueryTeacherCount.append( "  state_name ");
+//				strQueryTeacherCount.append( "  order by state_name   ");
 				break;
            case "S1":
-        		strQueryTeacherCount.append(" select ");
+        		strQueryTeacherCount.append(" select  ");
 				strQueryTeacherCount.append("	sum(primaryonlym)  as primaryonlym,	") 	;
 				strQueryTeacherCount.append("	sum(primaryonlyf)  as primaryonlyf,	") 	;
 				strQueryTeacherCount.append("	sum(upperprimaryonlym)  as upperprimaryonlym,	") 	;
@@ -2238,13 +2263,16 @@ public static String QRBoardWiseSchool_94(String strType, String StrCode) {
 				strQueryTeacherCount.append("	sum(  secondaryandhighersecondarym + highersecondaryonlym + secondaryandhighersecondaryf + highersecondaryonlyf )  as highersecondarytotal,	") 	;
 				
 				strQueryTeacherCount.append( "  sch_mgmt_name, sch_mgmt_id , ");
-				strQueryTeacherCount.append( "  'all_india' as location_name ");
+				strQueryTeacherCount.append( "  state_name as location_name ");
 				strQueryTeacherCount.append( "  from reports.teacher_cat_mgmt_qual  ");
 				strQueryTeacherCount.append( "  where state_cd = '"+locCode+"'");
 				strQueryTeacherCount.append("   and  year_id = "+ yearId);
-				strQueryTeacherCount.append( "  group by  ");
-				strQueryTeacherCount.append( "  sch_mgmt_name ,sch_mgmt_id  ");
-				strQueryTeacherCount.append( "  order by sch_mgmt_id   ");
+				strQueryTeacherCount.append("  group by");
+				strQueryTeacherCount.append("  grouping sets ((sch_mgmt_name,sch_mgmt_id,state_name),()) ");
+				strQueryTeacherCount.append("  order by state_name,sch_mgmt_id  ");
+//				strQueryTeacherCount.append( "  group by  ");
+//				strQueryTeacherCount.append( "  sch_mgmt_name ,sch_mgmt_id  ");
+//				strQueryTeacherCount.append( "  order by sch_mgmt_id   ");
 	           break;
            case "SD" :
         	   strQueryTeacherCount.append(" select ");
@@ -2306,14 +2334,19 @@ public static String QRBoardWiseSchool_94(String strType, String StrCode) {
 				strQueryTeacherCount.append("	sum( secondaryandhighersecondaryf + highersecondaryonlyf )  as highersecondaryftotal,	") 	;			
 				strQueryTeacherCount.append("	sum(  secondaryandhighersecondarym + highersecondaryonlym + secondaryandhighersecondaryf + highersecondaryonlyf )  as highersecondarytotal,	") 	;
 				
-				strQueryTeacherCount.append( "  district_name as  location_name  ");
+				strQueryTeacherCount.append( "  district_name as  location_name,sch_mgmt_name  ");
 				strQueryTeacherCount.append( "  ");
 				strQueryTeacherCount.append( "  from reports.teacher_cat_mgmt_qual  ");
 				strQueryTeacherCount.append( "  where state_cd = '"+locCode+"'");
 				strQueryTeacherCount.append("   and  year_id = "+ yearId);
-				strQueryTeacherCount.append( "  group by  ");
-				strQueryTeacherCount.append( "  district_name ");
-				strQueryTeacherCount.append( "  order by district_name   ");
+				
+
+				strQueryTeacherCount.append("  group by  ");
+				strQueryTeacherCount.append("  grouping sets ((district_cd,district_name,sch_mgmt_name,sch_mgmt_id),(district_name),()) ");
+				strQueryTeacherCount.append("  order by district_name,sch_mgmt_id  ");
+//				strQueryTeacherCount.append( "  group by  ");
+//				strQueryTeacherCount.append( "  district_name ");
+//				strQueryTeacherCount.append( "  order by district_name   ");
 			    break;
            case "D1" :
         	   strQueryTeacherCount.append(" select ");
@@ -2379,9 +2412,13 @@ public static String QRBoardWiseSchool_94(String strType, String StrCode) {
 				strQueryTeacherCount.append( "  from reports.teacher_cat_mgmt_qual  ");
 				strQueryTeacherCount.append( "  where district_cd = '"+locCode+"'");
 				strQueryTeacherCount.append("   and  year_id = "+ yearId);
-				strQueryTeacherCount.append( "  group by  ");
-				strQueryTeacherCount.append( "  sch_mgmt_name ,sch_mgmt_id  ");
-				strQueryTeacherCount.append( "  order by sch_mgmt_id   ");
+//				strQueryTeacherCount.append( "  group by  ");
+//				strQueryTeacherCount.append( "  sch_mgmt_name ,sch_mgmt_id  ");
+//				strQueryTeacherCount.append( "  order by sch_mgmt_id   ");
+				
+				strQueryTeacherCount.append("  group by ");
+				strQueryTeacherCount.append("  grouping sets ((district_cd,district_name,sch_mgmt_name,sch_mgmt_id),(district_name),()) ");
+				strQueryTeacherCount.append("  order by district_name,sch_mgmt_id  ");
         	    break;
            case "DB" :
         		strQueryTeacherCount.append(" select ");

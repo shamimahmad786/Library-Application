@@ -19,22 +19,22 @@ public class EnrolmentQueryStringPostgres {
 				strQuery.append(  QueryString.QRAllClassGender("IXIIBG") ) ; 
 				strQuery.append(" ,   "+ QueryString.QRAllClassGender("PUPSHSBG"));
 				strQuery.append("  ,  "+ QueryString.QRAllClassGender("TOTAL"));
-				strQuery.append(",  sch_mgmt_name, category_name, loc_name ,item_name  ");
+				strQuery.append(",  sch_mgmt_name, category_name, loc_name ,item_name,sch_type_name  ");
 				strQuery.append(" ,  'All India' as location_name " );
 				strQuery.append(" from reports.enrollment_fresh_minority_wise   ");
 				strQuery.append(" where year_id= " + year);
-				strQuery.append(" GROUP BY sch_mgmt_name, category_name, loc_name ,item_name , year_id  ");
+				strQuery.append(" GROUP BY sch_mgmt_name, category_name, loc_name ,item_name , year_id,sch_type_name  ");
 				break;
 			case "A" :
 				strQuery.append(" select  year_id , "  );
 				strQuery.append(  QueryString.QRAllClassGender("IXIIBG") ) ; 
 				strQuery.append(" ,   "+ QueryString.QRAllClassGender("PUPSHSBG"));
 				strQuery.append("  ,  "+ QueryString.QRAllClassGender("TOTAL"));
-				strQuery.append(",  sch_mgmt_name, category_name, loc_name , item_name ");
+				strQuery.append(",  sch_mgmt_name, category_name, loc_name , item_name,sch_type_name ");
 				strQuery.append(" ,  state_name as location_name " );
 				strQuery.append(" from reports.enrollment_fresh_minority_wise   ");
 				strQuery.append(" where year_id= " + year);
-				strQuery.append(" GROUP BY sch_mgmt_name, category_name, loc_name ,item_name,  state_name ,year_id ");			
+				strQuery.append(" GROUP BY sch_mgmt_name, category_name, loc_name ,item_name,  state_name ,year_id,sch_type_name ");			
 				strQuery.append(" order by state_name, category_name , sch_mgmt_name ");
 				break;
 			case "S" :
@@ -42,12 +42,12 @@ public class EnrolmentQueryStringPostgres {
 				strQuery.append(  QueryString.QRAllClassGender("IXIIBG") ) ; 
 				strQuery.append(" ,   "+ QueryString.QRAllClassGender("PUPSHSBG"));
 				strQuery.append("  ,  "+ QueryString.QRAllClassGender("TOTAL"));
-				strQuery.append(",  sch_mgmt_name, category_name, loc_name , item_name ");
+				strQuery.append(",  sch_mgmt_name, category_name, loc_name , item_name,sch_type_name ");
 				strQuery.append(" ,  state_name as location_name " );
 				strQuery.append(" from reports.enrollment_fresh_minority_wise  ");
 				strQuery.append(" where st_code= '"+StrCode+"'" );
 				strQuery.append(" and year_id= " + year);
-				strQuery.append(" GROUP BY sch_mgmt_name, category_name, loc_name , item_name , state_name ,year_id  ");
+				strQuery.append(" GROUP BY sch_mgmt_name, category_name, loc_name , item_name , state_name ,year_id,sch_type_name ");
 				strQuery.append(" order by state_name, category_name , sch_mgmt_name ");
 				break;
 			case "D" :
@@ -55,12 +55,12 @@ public class EnrolmentQueryStringPostgres {
 				strQuery.append(  QueryString.QRAllClassGender("IXIIBG") ) ; 
 				strQuery.append(" ,   "+ QueryString.QRAllClassGender("PUPSHSBG"));
 				strQuery.append("  ,  "+ QueryString.QRAllClassGender("TOTAL"));
-				strQuery.append(",  sch_mgmt_name, category_name, loc_name , item_name ");
+				strQuery.append(",  sch_mgmt_name, category_name, loc_name , item_name,sch_type_name ");
 				strQuery.append(" ,  district_name as location_name " );
 				strQuery.append(" from reports.enrollment_fresh_minority_wise  ");
 				strQuery.append(" where st_code= '"+StrCode+"'" );
 				strQuery.append(" and year_id= " + year);
-				strQuery.append(" GROUP BY sch_mgmt_name, category_name, loc_name , item_name , district_name ,year_id ");
+				strQuery.append(" GROUP BY sch_mgmt_name, category_name, loc_name , item_name , district_name ,year_id,sch_type_name ");
 				strQuery.append(" order by loc_name ");
 				break;
 			case "D1" :
@@ -68,12 +68,12 @@ public class EnrolmentQueryStringPostgres {
 				strQuery.append(  QueryString.QRAllClassGender("IXIIBG") ) ; 
 				strQuery.append(" ,   "+ QueryString.QRAllClassGender("PUPSHSBG"));
 				strQuery.append("  ,  "+ QueryString.QRAllClassGender("TOTAL"));
-				strQuery.append(",  sch_mgmt_name, category_name, loc_name , item_name ");
+				strQuery.append(",  sch_mgmt_name, category_name, loc_name , item_name,sch_type_name ");
 				strQuery.append(" ,  district_name as location_name " );
 				strQuery.append(" from reports.enrollment_fresh_minority_wise  ");
 				strQuery.append(" where dt_code= '"+StrCode+"'" );
 				strQuery.append(" and year_id= " + year);
-				strQuery.append(" GROUP BY sch_mgmt_name, category_name, loc_name , item_name , district_name ,year_id ");
+				strQuery.append(" GROUP BY sch_mgmt_name, category_name, loc_name , item_name , district_name ,year_id,sch_type_name ");
 				strQuery.append(" order by district_name ");
 				break;
 			case "B" :
@@ -81,12 +81,12 @@ public class EnrolmentQueryStringPostgres {
 				strQuery.append(  QueryString.QRAllClassGender("IXIIBG") ) ; 
 				strQuery.append(" ,   "+ QueryString.QRAllClassGender("PUPSHSBG"));
 				strQuery.append("  ,  "+ QueryString.QRAllClassGender("TOTAL"));
-				strQuery.append(",  sch_mgmt_name, category_name, loc_name , sch_type_name , item_name  ");
+				strQuery.append(",  sch_mgmt_name, category_name, loc_name , sch_type_name , item_name,sch_type_name  ");
 				strQuery.append(" ,  udise_block_name as location_name " );
 				strQuery.append(" from reports.enrollment_fresh_minority_wise  ");
 				strQuery.append(" where dt_code= '"+StrCode+"'" );
 				strQuery.append(" and year_id= " + year);
-				strQuery.append(" GROUP BY sch_mgmt_name, category_name, loc_name , sch_type_name , item_name  , udise_block_name ,year_id ");
+				strQuery.append(" GROUP BY sch_mgmt_name, category_name, loc_name , sch_type_name , item_name  , udise_block_name ,year_id,sch_type_name ");
 				strQuery.append(" order by udise_block_name ");
 				break;
 			case "B1" :
@@ -94,15 +94,16 @@ public class EnrolmentQueryStringPostgres {
 				strQuery.append(  QueryString.QRAllClassGender("IXIIBG") ) ; 
 				strQuery.append(" ,   "+ QueryString.QRAllClassGender("PUPSHSBG"));
 				strQuery.append("  ,  "+ QueryString.QRAllClassGender("TOTAL"));
-				strQuery.append(",  sch_mgmt_name, category_name, loc_name , sch_type_name , item_name ");
+				strQuery.append(",  sch_mgmt_name, category_name, loc_name , sch_type_name , item_name,sch_type_name ");
 				strQuery.append(" ,  udise_block_name as location_name " );
 				strQuery.append(" from reports.section_wise_enrollment_minority_141  ");
 				strQuery.append(" where block_cd= '"+StrCode+"'" );
 				strQuery.append(" and year_id= " + year);
-				strQuery.append(" GROUP BY sch_mgmt_name, category_name, loc_name , sch_type_name , item_name , udise_block_name ,year_id ");
+				strQuery.append(" GROUP BY sch_mgmt_name, category_name, loc_name , sch_type_name , item_name , udise_block_name ,year_id,sch_type_name ");
 				strQuery.append(" order by udise_block_name ");
 				break;
 			}
+			System.out.println(strQuery.toString());
 				  		  return strQuery.toString();
 		    
 		}catch(Exception e) {
@@ -885,7 +886,9 @@ public static String QRRptSociCateWise(String strType, String StrCode ,Integer y
 			strQuery.append("  'All India' as location_name"  );
 			strQuery.append(" from reports.master_caste_enrolment_drop_promo_retn rtn ");
 			strQuery.append(" where  year_id = "+ yearId);			
-			strQuery.append(" group by caste_name  , caste_id   ");
+		//	strQuery.append(" group by caste_name  , caste_id   ");
+			strQuery.append(" group by    ");
+			strQuery.append(" grouping sets( ( caste_name  , caste_id ) ,() ) ");
 			strQuery.append(" order by caste_id   ");
 			
 			
@@ -912,7 +915,9 @@ public static String QRRptSociCateWise(String strType, String StrCode ,Integer y
 			strQuery.append("  state_name as location_name"  );
 			strQuery.append(" from reports.master_caste_enrolment_drop_promo_retn rtn ");
 			strQuery.append(" where  year_id = "+ yearId);			
-			strQuery.append(" group by state_name ,caste_name  , caste_id   ");
+//			strQuery.append(" group by state_name ,caste_name  , caste_id   ");
+			strQuery.append(" group by ");
+			strQuery.append(" grouping sets ((state_name ,caste_name  , caste_id),(state_name),())   ");
 			strQuery.append(" order by state_name , caste_id   ");
 			
 //			strQuery.append(" select caste_id as item_id , item_name ,  "  );
@@ -940,7 +945,9 @@ public static String QRRptSociCateWise(String strType, String StrCode ,Integer y
 			strQuery.append(" from reports.master_caste_enrolment_drop_promo_retn rtn ");
 			strQuery.append(" where  year_id = "+ yearId);	
 			strQuery.append(" and  state_cd= '"+StrCode+"' " );
-			strQuery.append(" group by state_name ,caste_name  , caste_id   ");
+//			strQuery.append(" group by state_name ,caste_name  , caste_id   ");
+			strQuery.append(" group by ");
+			strQuery.append(" grouping sets ((state_name ,caste_name  , caste_id),())   ");
 			strQuery.append(" order by state_name , caste_id   ");
 			
 			
@@ -969,7 +976,8 @@ public static String QRRptSociCateWise(String strType, String StrCode ,Integer y
 			strQuery.append(" from reports.master_caste_enrolment_drop_promo_retn rtn ");
 			strQuery.append(" where  year_id = "+ yearId);	
 			strQuery.append(" and  state_cd= '"+StrCode+"' " );
-			strQuery.append(" group by district_name ,caste_name  , caste_id   ");
+			strQuery.append(" group by ");
+			strQuery.append(" grouping sets ((district_name ,caste_name  , caste_id),(district_name),())   ");
 			strQuery.append(" order by district_name , caste_id   ");
 			
 //			strQuery.append(" select caste_id as item_id , item_name ,  "  );
@@ -992,7 +1000,9 @@ public static String QRRptSociCateWise(String strType, String StrCode ,Integer y
 			strQuery.append(" from reports.repeater_caste_wise   ");
 			strQuery.append(" where  dt_code= '"+StrCode+"' " );
 			strQuery.append(" and  year_id = "+ yearId);
-			strQuery.append(" group by district_name , caste_id , item_name");
+//			strQuery.append(" group by district_name , caste_id , item_name");
+			strQuery.append(" group by ");
+			strQuery.append(" grouping sets ((district_name , caste_id , item_name),())");
 			strQuery.append(" order by district_name,  caste_id");
 			break;
 		case "B" :
@@ -1539,7 +1549,7 @@ public static String QRRatesDrop_out_Retention_4011_113(String strType, String l
 				 strallState.append("  'All India' as location_name , caste_id  , caste_name ");
 				 strallState.append("  from reports.master_caste_enrolment_drop_promo_retn mcedpr  ");
 				 strallState.append("  where year_id= " +yearId);
-				 strallState.append("   group by caste_id , caste_name ");
+				 strallState.append("   group by grouping sets (( caste_id , caste_name ),())");
 			 break;
 		 case "S" :
 			 	strallState.append("  select * from  ");
@@ -1647,7 +1657,7 @@ public static String QRRatesDrop_out_Retention_4011_113(String strType, String l
 				strallState.append(" 5 as caste_id  ,'Overall' as  caste_name   " );
 				strallState.append(" from reports.master_caste_enrolment_drop_promo_retn ") ;
 				strallState.append(" where year_id= " +yearId);
-				strallState.append(" group by   state_name  " );
+				strallState.append(" group by grouping sets ((state_name),())  " );
 				strallState.append(" ) aa ");
 				strallState.append(" ");
 				strallState.append(" order by  location_name, caste_id , caste_name " );
@@ -1705,7 +1715,7 @@ public static String QRRatesDrop_out_Retention_4011_113(String strType, String l
 			    strallState.append(" where   ") ;
 			    strallState.append("  state_cd ='"+locCode+"'");
 			    strallState.append(" and year_id= " +yearId);
- 			    strallState.append(" group by  caste_id , state_name , caste_name" );
+ 			    strallState.append(" group by grouping sets(( caste_id , state_name , caste_name),())" );
 			    strallState.append(" order by  caste_id" );
 			 break;
 		 case "D" :
@@ -1762,7 +1772,7 @@ public static String QRRatesDrop_out_Retention_4011_113(String strType, String l
 				 strallState.append("  state_cd ='"+locCode+"'");
 				 strallState.append(" and year_id= " +yearId);
 				// strallState.append("  and district_name is not null ");
-				 strallState.append(" group by  caste_name , district_name " );
+				 strallState.append(" group by  grouping sets (( caste_name , district_name),(district_name),()) " );
 				 strallState.append(" order by  district_name , caste_name " );
 			 break;
 		 case "D1" :
@@ -1818,7 +1828,7 @@ public static String QRRatesDrop_out_Retention_4011_113(String strType, String l
 			    strallState.append(" where   ") ;
 			    strallState.append("  dt_code ='"+locCode+"'");
 			    strallState.append(" and year_id= " +yearId);
-			    strallState.append(" group by  caste_name , district_name " );
+			    strallState.append(" group by grouping sets (( caste_name , district_name),()) " );
 			    strallState.append(" order by  caste_name" );
 			 break;
 		 case "B" :
@@ -1869,11 +1879,29 @@ public static String QRRatesTransition_4015_119(String strType, String locCode ,
 			    strallState.append("  'All India' as location_name  ") ;
 			    strallState.append(" 	 from reports.master_caste_enrolment_drop_promo_retn " ); 
 			    strallState.append(" where  year_id= " +yearId);
-			    strallState.append(" group by  caste_id , caste_name  ");
+			    //strallState.append(" group by  caste_id , caste_name  ");
+			    strallState.append(" group by grouping sets ( ( caste_id , caste_name), ()) ");
 			    strallState.append(" order by  caste_id   ");
 			 break;
 		  case "S" :
-				strallState.append(" select  SUM(c6_b- r6_b) as c6_b , SUM(ly5_b) as ly5_b , " );
+//				strallState.append(" select  SUM(c6_b- r6_b) as c6_b , SUM(ly5_b) as ly5_b , " );
+//				strallState.append("   SUM(c6_g- r6_g) as c6_g , SUM(ly5_g) as ly5_g , " );
+//			    strallState.append("  SUM(c6_b + c6_g - r6_b- r6_g) as c6 , SUM(ly5_b+ly5_g) as  ly5 ,  ");
+//			    strallState.append("  SUM(c9_b- r9_b) as c9_b , SUM(ly8_b) as ly8_b , " );
+//				strallState.append("  SUM(c9_g- r9_g) as c9_g , SUM(ly8_g) as ly8_g , " );
+//			    strallState.append("  SUM(c9_b + c9_g - r9_b- r9_g) as c9 , SUM(ly8_b+ly8_g) as  ly8 ,  ");
+//			    strallState.append("  SUM(c11_b- r11_b) as c11_b , SUM(ly10_b) as ly10_b , " );
+//				strallState.append("  SUM(c11_g- r11_g) as c11_g , SUM(ly10_g) as ly10_g , " );
+//			    strallState.append("  SUM(c11_b + c11_g - r11_b- r11_g) as c11 , SUM(ly10_b+ly10_g) as  ly10 ,  ");
+//			    strallState.append(" caste_id , caste_name  , ");
+//			    strallState.append("  state_name as location_name  ") ;
+//			    strallState.append(" 	 from reports.master_caste_enrolment_drop_promo_retn " ); 
+//			    strallState.append(" where year_id= " +yearId);
+//			    strallState.append(" group by  caste_id , caste_name , state_name  ");
+//			    strallState.append(" order by  state_name ,  caste_id   ");
+			    
+			    
+			    strallState.append(" select  SUM(c6_b- r6_b) as c6_b , SUM(ly5_b) as ly5_b , " );
 				strallState.append("   SUM(c6_g- r6_g) as c6_g , SUM(ly5_g) as ly5_g , " );
 			    strallState.append("  SUM(c6_b + c6_g - r6_b- r6_g) as c6 , SUM(ly5_b+ly5_g) as  ly5 ,  ");
 			    strallState.append("  SUM(c9_b- r9_b) as c9_b , SUM(ly8_b) as ly8_b , " );
@@ -1886,8 +1914,10 @@ public static String QRRatesTransition_4015_119(String strType, String locCode ,
 			    strallState.append("  state_name as location_name  ") ;
 			    strallState.append(" 	 from reports.master_caste_enrolment_drop_promo_retn " ); 
 			    strallState.append(" where year_id= " +yearId);
-			    strallState.append(" group by  caste_id , caste_name , state_name  ");
+			    strallState.append(" group by  grouping sets( (caste_id , caste_name , state_name ), (state_name),() )   ");
+			//    strallState.append(" group by  caste_id , caste_name , state_name  ");
 			    strallState.append(" order by  state_name ,  caste_id   ");
+			    
 			 break;
 		  case "S1" :
 		      strallState.append(" select  SUM(c6_b- r6_b) as c6_b , SUM(ly5_b) as ly5_b , " );
@@ -1904,7 +1934,8 @@ public static String QRRatesTransition_4015_119(String strType, String locCode ,
 		      strallState.append(" 	 from reports.master_caste_enrolment_drop_promo_retn " ); 
 		      strallState.append(" 	 where  state_cd ='"+locCode.toString()+"'" );
 		      strallState.append(" and year_id= " +yearId);
-		      strallState.append(" group by  caste_id , caste_name , state_name  ");
+//		      strallState.append(" group by  caste_id , caste_name ,state_name   ");
+		      strallState.append("  group by  grouping sets( (caste_id , caste_name , state_name ),() )    ");
 		      strallState.append(" order by  state_name , caste_id   ");
 			 break;
 		  case "D" :
@@ -1922,7 +1953,8 @@ public static String QRRatesTransition_4015_119(String strType, String locCode ,
 		      strallState.append(" 	 from reports.master_caste_enrolment_drop_promo_retn " ); 
 		      strallState.append(" 	 where  state_cd ='"+locCode.toString()+"'" );
 		      strallState.append(" and year_id= " +yearId);
-		      strallState.append(" group by  caste_id , caste_name , district_name  ");
+		      strallState.append(" group by  grouping sets( (caste_id , caste_name , district_name ), (district_name),() )   ");
+		      //strallState.append(" group by  caste_id , caste_name , district_name  ");
 		      strallState.append(" order by  district_name ,  caste_id   ");
 			 break;
 		  case "D1" :
@@ -1940,7 +1972,8 @@ public static String QRRatesTransition_4015_119(String strType, String locCode ,
 			     strallState.append(" 	 from reports.master_caste_enrolment_drop_promo_retn " ); 
 			     strallState.append(" 	 where  district_cd ='"+locCode.toString()+"'" );
 			     strallState.append(" and year_id= " +yearId);
-			     strallState.append(" group by  caste_id , caste_name , district_name  ");
+//			     strallState.append(" group by  caste_id , caste_name , district_name  ");
+			     strallState.append(" group by  grouping sets( (caste_id , caste_name , district_name ), (district_name) )   ");
 			     strallState.append(" order by  district_name ,  caste_id   ");
 			 break;
 		 }

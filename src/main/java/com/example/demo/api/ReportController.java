@@ -54,6 +54,7 @@ import com.example.demo.report.modal.ReportClassification;
 import com.example.demo.report.modal.ReportDomain;
 import com.example.demo.report.modal.ReportName;
 import com.example.demo.report.modal.ReportTags;
+import com.example.demo.report.modal.ReportYearMapping;
 import com.example.demo.report.modal.staticReport;
 import com.example.demo.report.service.Aspirationalmpl;
 import com.example.demo.report.service.ReportImpl;
@@ -171,8 +172,18 @@ public class ReportController {
 //	}
 	
 	
-	@RequestMapping(value = "/getChartsData", method = RequestMethod.POST)
-	public staticReportBean getChartsData(@RequestBody MapingCondition mappingId) {
+	@RequestMapping(value = "/getChartsData", method = RequestMethod.POST,consumes = MediaType.TEXT_PLAIN_VALUE)
+	public staticReportBean getChartsData(@RequestBody String data) {
+		
+		System.out.println("For Chat Data--->"+data);
+		ObjectMapper mapperObj = new ObjectMapper();
+		MapingCondition  mappingId=new MapingCondition();
+		try {
+			mappingId = mapperObj.readValue(data, new TypeReference<MasterBean>() {
+			});
+		}catch(Exception ex) {
+			
+		}
 		// System.out.println("get Master Data condition value--->"+mappingId);
 		// System.out.println("get chart data mapping");
 		//return reportImpl.getMasterData(masterName);
@@ -507,6 +518,24 @@ fr.close();
 		 reportImpl.saveAuditTay(mappingId);
 		
 	}
+	
+	@RequestMapping(value = "/getReportYearByMapId", method = RequestMethod.POST,consumes = MediaType.TEXT_PLAIN_VALUE)
+	public List<ReportYearMapping> getReportYearByMapId(@RequestBody String data,HttpServletRequest request) {
+
+		ObjectMapper mapperObj = new ObjectMapper();
+		Map<String, String> resultMap = new HashMap<String, String>();
+		try {
+			resultMap = mapperObj.readValue(data, new TypeReference<HashMap<String, String>>() {
+			});
+		}catch(Exception ex) {
+			
+		}
+//		mappingId.setIpAddress(request.getRemoteAddr());
+		 return reportImpl.getReportYearByMapId(resultMap);
+		
+	}
+	
+	
 	
 
 	

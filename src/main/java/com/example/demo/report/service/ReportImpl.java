@@ -15,6 +15,7 @@ import java.util.Optional;
 //import javax.management.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -25,6 +26,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 //import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.demo.bean.ManagementGridEnroll;
 import com.example.demo.bean.MasterBean;
@@ -44,12 +46,14 @@ import com.example.demo.report.modal.ReportClassification;
 import com.example.demo.report.modal.ReportDomain;
 import com.example.demo.report.modal.ReportName;
 import com.example.demo.report.modal.ReportTags;
+import com.example.demo.report.modal.ReportYearMapping;
 import com.example.demo.report.modal.staticReport;
 import com.example.demo.report.repository.NativeRepository;
 import com.example.demo.report.repository.ReportClassificationRepository;
 import com.example.demo.report.repository.ReportDomainRepository;
 import com.example.demo.report.repository.ReportNameRepository;
 import com.example.demo.report.repository.ReportTagsRepository;
+import com.example.demo.report.repository.ReportYearMappingRepository;
 import com.example.demo.report.repository.StaticReportRepository;
 import com.example.demo.repository.GroupMasterRepository;
 import com.example.demo.repository.ReportAuditRepository;
@@ -101,6 +105,12 @@ public class ReportImpl {
 
 	@Value("${jsonPath}")
 	private String jsonPath;
+	
+	
+	@Autowired
+	ReportYearMappingRepository reportYearMappingRepository;
+	
+	
 
 	public List<ReportName> getReportName() {
 		return reportNameRepository.findAllByOrderByIdAsc();
@@ -1013,7 +1023,7 @@ public class ReportImpl {
 			} else if (mappingId.equalsIgnoreCase("80")) {
 				flashName = "computer_available_yn";
 			} else if (mappingId.equalsIgnoreCase("118")) {
-				flashName = "handrails_yn";
+				flashName = "ramps_handrail_yn";
 			} else if (mappingId.equalsIgnoreCase("154")) {
 				flashName = "library_with_books";
 			}
@@ -2022,12 +2032,13 @@ public class ReportImpl {
 						&& resultMap.get("dist").equalsIgnoreCase("none")) {
 					
 					String allState = SchoolQueryStringPostgres.QRCasteWise_96("S", "000" ,yearId);
+					System.out.println(allState);
 					return SchoolReportImplPostgres.commonMethodToFetchReportDataFromDB(allState, "enrollment_fresh_caste_wise");
 
 				} else if (resultMap.get("state").equalsIgnoreCase("national")
 						&& resultMap.get("dist").equalsIgnoreCase("none")) {
-					//  // // System.out.println("In national");
 					String strYear = SchoolQueryStringPostgres.QRCasteWise_96("N", "000" ,yearId);
+					System.out.println(strYear);
 					return SchoolReportImplPostgres.commonMethodToFetchReportDataFromDB(strYear, "enrollment_fresh_caste_wise");
 				}
 
@@ -2078,6 +2089,7 @@ public class ReportImpl {
 					// location_code ='"+resultMap.get("dist")+"' order by location_name, item_name
 					// ";
 					String singleDistrict = EnrolmentQueryStringPostgres.QRRptSociCateWise("D1", resultMap.get("dist") ,yearId);
+//					System.out.println(singleDistrict);
 					return SchoolReportImplPostgres.commonMethodToFetchReportDataFromDB(singleDistrict, "repeater_caste_wise");
 //					String singleDistrict = QueryString.QRRptSociCateWise("D1", resultMap.get("dist"));
 //					return getSparkData(jsonName, singleDistrict, "", pivot, reportTypes, reportCode, graphQuery,
@@ -2653,7 +2665,7 @@ public class ReportImpl {
 						&& resultMap.get("dist").equalsIgnoreCase("none")) {
 					//  // System.out.println("In all state");
 					String allState = EnrolmentQueryStringPostgres.QRRateGER("S", "", yearId);
-					 System.out.println("GER ALL State"  +allState);
+					// System.out.println("GER ALL State"  +allState);
 					return SchoolReportImplPostgres.commonMethodToFetchReportDataFromDB(allState, "enrollment_fresh_caste_wise");
 				//	String allState = "";
 					//return ReportImplemetation.GetGER_101_4010("S", "", yearId);
@@ -2662,7 +2674,7 @@ public class ReportImpl {
 						&& resultMap.get("dist").equalsIgnoreCase("none")) {
 					
 					String allState = EnrolmentQueryStringPostgres.QRRateGER("N", "", yearId);
-					System.out.println("In national"+allState);
+				//	System.out.println("In national"+allState);
 					return SchoolReportImplPostgres.commonMethodToFetchReportDataFromDB(allState, "enrollment_fresh_caste_wise");
 					//return ReportImplemetation.GetGER_101_4010("N", "", yearId);
 				}
@@ -3688,7 +3700,7 @@ public class ReportImpl {
 						&& resultMap.get("dist").equalsIgnoreCase("none")) {
 					//  // System.out.println("In all state");
 					String allState = EnrolmentQueryStringPostgres.QRRatesDrop_out_Retention_4011_113("S", "99", yearId);
-					// System.out.print("allState "+allState);
+					 System.out.print("allState "+allState);
 					return SchoolReportImplPostgres.commonMethodToFetchReportDataFromDB(allState, "master_caste_enrolment_drop_promo_retn");
 //					String allState = "";
 //					allState = QueryString.QRRatesDrop_out_Retention_4011_113("S", "99");
@@ -7200,6 +7212,11 @@ public class ReportImpl {
 	
 	public void saveAuditTay(ReportAudit data) {
 		reportAuditRepository.save(data);
+	}
+	
+	
+	public List<ReportYearMapping> getReportYearByMapId(Map<String,String> data) {
+		return reportYearMappingRepository.findByMapIdOrderByYearIdDesc(Integer.parseInt(data.get("mapId")));
 	}
 	
 	
