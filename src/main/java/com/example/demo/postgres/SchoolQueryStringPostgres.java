@@ -15,7 +15,7 @@ public class SchoolQueryStringPostgres {
 				strQuery.append("  ") ; 
 				strQuery.append(" from reports.history_of_school_india_152 ");
 				strQuery.append("  where state_cd ='99' ");
-			//	strQuery.append("  and year_id ="+ yearId);
+				strQuery.append("  and year_id ="+ yearId);
 				strQuery.append("  order by estd_year desc") ; 
 				break;
 			case "S" :
@@ -23,7 +23,7 @@ public class SchoolQueryStringPostgres {
 				strQuery.append("  ") ; 
 				strQuery.append(" from reports.history_of_school_india_152 ");
 				strQuery.append("  where state_cd !='99' ");
-			//	strQuery.append("  and year_id ="+ yearId);
+				strQuery.append("  and year_id ="+ yearId);
 				strQuery.append("  order by state_name , estd_year desc") ; 
 				break;
 			case "S1" :
@@ -31,7 +31,7 @@ public class SchoolQueryStringPostgres {
 				strQuery.append("  ") ; 
 				strQuery.append(" from reports.history_of_school_india_152 ");
 				strQuery.append("  where state_cd ='"+StrCode.toString()+"' ");
-				//strQuery.append("  and year_id ="+ yearId);
+				strQuery.append("  and year_id ="+ yearId);
 				strQuery.append("  order by state_name , estd_year desc") ;
 				break;
 			case "D" :
@@ -39,7 +39,7 @@ public class SchoolQueryStringPostgres {
 				strQuery.append("  ") ; 
 				strQuery.append(" from reports.history_of_school_india_152 ");
 				strQuery.append("  where state_cd ='"+StrCode.toString()+"' ");
-				//strQuery.append("  and year_id ="+ yearId);
+				strQuery.append("  and year_id ="+ yearId);
 				strQuery.append("  order by  estd_year desc") ;
 				break;
 			case "D1" :
@@ -47,7 +47,7 @@ public class SchoolQueryStringPostgres {
 				strQuery.append("  ") ; 
 				strQuery.append(" from reports.history_of_school_india_152 ");
 				strQuery.append("  where state_cd ='"+StrCode.toString()+"' ");
-				//strQuery.append("  and year_id ="+ yearId);
+				strQuery.append("  and year_id ="+ yearId);
 				strQuery.append("  order by  estd_year desc") ;
 				break;
 			case "B" :
@@ -55,7 +55,7 @@ public class SchoolQueryStringPostgres {
 				strQuery.append("  ") ; 
 				strQuery.append(" from reports.history_of_school_india_152 ");
 				strQuery.append("  where state_cd ='"+StrCode.toString()+"' ");
-				//strQuery.append("  and year_id ="+ yearId);
+				strQuery.append("  and year_id ="+ yearId);
 				strQuery.append("  order by  estd_year desc") ;
 				break;
 			case "B1" :
@@ -63,7 +63,7 @@ public class SchoolQueryStringPostgres {
 				strQuery.append("  ") ; 
 				strQuery.append(" from reports.history_of_school_india_152 ");
 				strQuery.append("  where state_cd ='"+StrCode.toString()+"' ");
-	//			strQuery.append("  and year_id ="+ yearId);
+				strQuery.append("  and year_id ="+ yearId);
 				strQuery.append("  order by  estd_year desc") ;
 				break;
 			}
